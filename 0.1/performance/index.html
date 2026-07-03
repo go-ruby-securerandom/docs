@@ -421,6 +421,66 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#library-level-benchmark-go-api-vs-runtimes-2026-07-03" class="md-nav__link">
+    <span class="md-ellipsis">
+      Library-level benchmark (Go API vs runtimes) — 2026-07-03
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Library-level benchmark (Go API vs runtimes) — 2026-07-03">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hex-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      hex-16
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#random_bytes-32" class="md-nav__link">
+    <span class="md-ellipsis">
+      random_bytes-32
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uuid" class="md-nav__link">
+    <span class="md-ellipsis">
+      uuid
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#base64-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      base64-24
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#random_number-1e6" class="md-nav__link">
+    <span class="md-ellipsis">
+      random_number-1e6
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -499,6 +559,66 @@
       How to reproduce the cross-runtime comparison
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#library-level-benchmark-go-api-vs-runtimes-2026-07-03" class="md-nav__link">
+    <span class="md-ellipsis">
+      Library-level benchmark (Go API vs runtimes) — 2026-07-03
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Library-level benchmark (Go API vs runtimes) — 2026-07-03">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hex-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      hex-16
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#random_bytes-32" class="md-nav__link">
+    <span class="md-ellipsis">
+      random_bytes-32
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uuid" class="md-nav__link">
+    <span class="md-ellipsis">
+      uuid
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#base64-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      base64-24
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#random_number-1e6" class="md-nav__link">
+    <span class="md-ellipsis">
+      random_number-1e6
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -619,6 +739,253 @@ throughput</strong>, not byte-equality.</p>
 their ratios as order-of-magnitude. Any numbers added here will be real
 measured numbers from a dated run, on a named host with the SIMD lane stated,
 with nothing cherry-picked.</p>
+</div>
+<h2 id="library-level-benchmark-go-api-vs-runtimes-2026-07-03">Library-level benchmark (Go API vs runtimes) — 2026-07-03<a class="headerlink" href="#library-level-benchmark-go-api-vs-runtimes-2026-07-03" title="Permanent link">&para;</a></h2>
+<p>This section measures the <strong>pure-Go library directly, through its Go API</strong> — not
+the <code>rbgo</code> interpreter path recorded above. It isolates the library primitive
+from Ruby-interpreter dispatch, answering the parity question head-on: <em>is the
+pure-Go implementation as fast as the reference runtime's own <code>SecureRandom</code>?</em>
+The <strong>same ops, same inputs (fixed byte counts), same iteration counts</strong> run
+through the Go library and through each reference runtime's stdlib.</p>
+<div class="admonition danger">
+<p class="admonition-title">RNG output is nondeterministic — format/length verified, NOT bytes</p>
+<p><code>SecureRandom</code> draws the OS CSPRNG on every call, so its output is
+<strong>nondeterministic and canNOT be byte-compared</strong> across runtimes (unlike a
+pure encoder such as base64). Both drivers therefore <strong>verify the LENGTH /
+FORMAT</strong> of each op before timing — <code>hex(16)</code> → 32 hex chars,
+<code>random_bytes(32)</code> → 32 bytes, <code>uuid</code> matches the RFC-4122 UUID regex,
+<code>base64(24)</code> decodes to exactly 24 bytes, <code>random_number(1_000_000)</code> ∈
+[0, 1e6) — never the byte values. What the numbers isolate is the
+<strong>wrapper + hex/base64 encoding overhead</strong> (where go-simd/hex and
+go-simd/base64 help), <em>not</em> the entropy source: every runtime pulls the same
+OS CSPRNG for entropy, so that cost is common to all columns.</p>
+</div>
+<ul>
+<li><strong>Host:</strong> Apple M4 Max (<code>Mac16,5</code>, arm64), macOS 26.5.1 — <strong>date 2026-07-03</strong>.</li>
+<li><strong>Runtimes:</strong> Go 1.26.4 · MRI <code>ruby 4.0.5 +PRISM</code> · MRI + YJIT · JRuby 10.1.0.0
+  (OpenJDK 25) · TruffleRuby 34.0.1 (GraalVM CE Native).</li>
+<li><strong>Method:</strong> each process runs 3 untimed warm-up passes, then 25 timed passes of
+  a fixed inner loop (20 000 ops), timed with a monotonic clock; the <strong>best</strong> pass
+  is reported as <strong>ns/op</strong> (lower is better). <code>vs MRI</code> &lt; 1.00× means <em>faster than
+  MRI</em>. Interpreter start-up is outside the timed region, so these are operation
+  costs, not <code>ruby file.rb</code> process costs.</li>
+</ul>
+<h4 id="hex-16">hex-16<a class="headerlink" href="#hex-16" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Runtime</th>
+<th style="text-align: right;">ns/op</th>
+<th style="text-align: right;">vs MRI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>go-ruby (pure Go)</strong></td>
+<td style="text-align: right;">233.1</td>
+<td style="text-align: right;">0.20×</td>
+</tr>
+<tr>
+<td>MRI</td>
+<td style="text-align: right;">1151.8</td>
+<td style="text-align: right;">1.00×</td>
+</tr>
+<tr>
+<td>MRI + YJIT</td>
+<td style="text-align: right;">1081.5</td>
+<td style="text-align: right;">0.94×</td>
+</tr>
+<tr>
+<td>JRuby</td>
+<td style="text-align: right;">160.7</td>
+<td style="text-align: right;">0.14×</td>
+</tr>
+<tr>
+<td>TruffleRuby</td>
+<td style="text-align: right;">323.7</td>
+<td style="text-align: right;">0.28×</td>
+</tr>
+</tbody>
+</table>
+<h4 id="random_bytes-32">random_bytes-32<a class="headerlink" href="#random_bytes-32" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Runtime</th>
+<th style="text-align: right;">ns/op</th>
+<th style="text-align: right;">vs MRI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>go-ruby (pure Go)</strong></td>
+<td style="text-align: right;">215.9</td>
+<td style="text-align: right;">0.20×</td>
+</tr>
+<tr>
+<td>MRI</td>
+<td style="text-align: right;">1086.2</td>
+<td style="text-align: right;">1.00×</td>
+</tr>
+<tr>
+<td>MRI + YJIT</td>
+<td style="text-align: right;">997.7</td>
+<td style="text-align: right;">0.92×</td>
+</tr>
+<tr>
+<td>JRuby</td>
+<td style="text-align: right;">225.8</td>
+<td style="text-align: right;">0.21×</td>
+</tr>
+<tr>
+<td>TruffleRuby</td>
+<td style="text-align: right;">524.9</td>
+<td style="text-align: right;">0.48×</td>
+</tr>
+</tbody>
+</table>
+<h4 id="uuid">uuid<a class="headerlink" href="#uuid" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Runtime</th>
+<th style="text-align: right;">ns/op</th>
+<th style="text-align: right;">vs MRI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>go-ruby (pure Go)</strong></td>
+<td style="text-align: right;">229.4</td>
+<td style="text-align: right;">0.15×</td>
+</tr>
+<tr>
+<td>MRI</td>
+<td style="text-align: right;">1575.3</td>
+<td style="text-align: right;">1.00×</td>
+</tr>
+<tr>
+<td>MRI + YJIT</td>
+<td style="text-align: right;">1419.9</td>
+<td style="text-align: right;">0.90×</td>
+</tr>
+<tr>
+<td>JRuby</td>
+<td style="text-align: right;">431.4</td>
+<td style="text-align: right;">0.27×</td>
+</tr>
+<tr>
+<td>TruffleRuby</td>
+<td style="text-align: right;">463.1</td>
+<td style="text-align: right;">0.29×</td>
+</tr>
+</tbody>
+</table>
+<h4 id="base64-24">base64-24<a class="headerlink" href="#base64-24" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Runtime</th>
+<th style="text-align: right;">ns/op</th>
+<th style="text-align: right;">vs MRI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>go-ruby (pure Go)</strong></td>
+<td style="text-align: right;">244.4</td>
+<td style="text-align: right;">0.21×</td>
+</tr>
+<tr>
+<td>MRI</td>
+<td style="text-align: right;">1190.7</td>
+<td style="text-align: right;">1.00×</td>
+</tr>
+<tr>
+<td>MRI + YJIT</td>
+<td style="text-align: right;">1087.3</td>
+<td style="text-align: right;">0.91×</td>
+</tr>
+<tr>
+<td>JRuby</td>
+<td style="text-align: right;">234.0</td>
+<td style="text-align: right;">0.20×</td>
+</tr>
+<tr>
+<td>TruffleRuby</td>
+<td style="text-align: right;">487.1</td>
+<td style="text-align: right;">0.41×</td>
+</tr>
+</tbody>
+</table>
+<h4 id="random_number-1e6">random_number-1e6<a class="headerlink" href="#random_number-1e6" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Runtime</th>
+<th style="text-align: right;">ns/op</th>
+<th style="text-align: right;">vs MRI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>go-ruby (pure Go)</strong></td>
+<td style="text-align: right;">135.3</td>
+<td style="text-align: right;">0.14×</td>
+</tr>
+<tr>
+<td>MRI</td>
+<td style="text-align: right;">988.0</td>
+<td style="text-align: right;">1.00×</td>
+</tr>
+<tr>
+<td>MRI + YJIT</td>
+<td style="text-align: right;">680.9</td>
+<td style="text-align: right;">0.69×</td>
+</tr>
+<tr>
+<td>JRuby</td>
+<td style="text-align: right;">82.9</td>
+<td style="text-align: right;">0.08×</td>
+</tr>
+<tr>
+<td>TruffleRuby</td>
+<td style="text-align: right;">116.5</td>
+<td style="text-align: right;">0.12×</td>
+</tr>
+</tbody>
+</table>
+<p>go-ruby-securerandom <strong>beats MRI on every op</strong> (0.14×–0.21×) — roughly <strong>5× faster</strong>.
+Two effects compound: Go's <code>crypto/rand</code> supplies entropy cheaply, and the hex /
+base64 formatting rides the <a href="https://github.com/go-simd/hex">go-simd/hex</a> and
+<a href="https://github.com/go-simd/base64">go-simd/base64</a> NEON kernels, whereas MRI
+hex-encodes byte-by-byte in its C stdlib. On the shortest loops (<code>random_number</code>,
+<code>hex</code>, <code>base64</code>) warm <strong>JRuby</strong> edges out the pure-Go column: its JIT has fully
+warmed these trivial ops within the warm-up budget and it draws from a JVM CSPRNG
+— read those as steady-state JIT rows, not one-shot costs. Since entropy is the
+common cost on both sides, what this table really compares is <strong>wrapper + encoding
+overhead</strong>, and there the pure-Go library is at or ahead of MRI throughout.</p>
+<div class="admonition note">
+<p class="admonition-title">Reproduce</p>
+<p>The harness is committed under
+<a href="https://github.com/go-ruby-securerandom/docs/tree/main/benchmarks"><code>benchmarks/</code></a>:
+a self-contained Go driver (<code>go/</code>, pins the published library via <code>go.mod</code>
+pseudo-version, no <code>replace</code>), the equivalent <code>ruby/securerandom.rb</code> workload,
+and <code>run.sh</code>. Run <code>GOWORK=off bash benchmarks/run.sh</code>; env <code>OUTER</code>/<code>WARM</code> tune
+the pass budget and <code>RUBY</code>/<code>JRUBY</code>/<code>TRUFFLERUBY</code> select the runtime binaries.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warm-up budget &amp; noise — honest framing</p>
+<p>Numbers reflect a <strong>fixed warm-process budget</strong> (3 warm-up + 25 timed passes
+in one process). The JVM/GraalVM JITs (JRuby, TruffleRuby) may need a larger
+warm-up to reach steady state, so their columns can <strong>understate</strong> peak
+throughput. These are all <strong>sub-microsecond</strong> ops, which carry the most
+relative noise; treat the ratios as order-of-magnitude. Every number here is a
+<strong>real measured value</strong> from the dated run above — nothing is fabricated,
+estimated, or cherry-picked. Because the RNG output is nondeterministic, only
+the <strong>format/length</strong> of each op is verified (never the bytes). The go-ruby
+column is the pure-Go library; every other column is that interpreter's own
+<code>securerandom</code> stdlib doing the equivalent work.</p>
 </div>
 
 
