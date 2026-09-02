@@ -10,10 +10,14 @@ github.com/go-ruby-securerandom/securerandom v0.0.0-20260825131438-db77ba9ff651 
 github.com/go-ruby-securerandom/securerandom v0.0.0-20260825131438-db77ba9ff651/go.mod h1:vE4tkuEGOMD+NmN95aeZc6EbPwb5aSpPZ+2J7zeT4yQ=
 github.com/go-ruby-securerandom/securerandom v0.0.0-20260831125456-69e9dfba0f73 h1:V54OOtJsUYHeNCyfMiWam4JSWIZGYKwVHEkwRgmLGJU=
 github.com/go-ruby-securerandom/securerandom v0.0.0-20260831125456-69e9dfba0f73/go.mod h1:yCkuFQKLDJh5Xq2aOsybwjTfm1dSuYhbjavBBCoIALU=
+github.com/go-ruby-securerandom/securerandom v0.0.0-20260901145235-a424beb616c0 h1:vhIErQ0ewCl3yY7AmPe/YKcLTBfHQu5g6e9t6LGNKpg=
+github.com/go-ruby-securerandom/securerandom v0.0.0-20260901145235-a424beb616c0/go.mod h1:vrWvaTCpbDF3OgjEtK7qVVyaHHRjQdXw0yjxKJ2CC7s=
 github.com/go-simd/base64 v0.0.0-20260627054622-4058a7093f4c h1:iA1vHw+pR44TUtDlviXz3P8pAExO1nSm39PMZ7MsuYU=
 github.com/go-simd/base64 v0.0.0-20260627054622-4058a7093f4c/go.mod h1:/nL/YHcchLkENbcFEEqAcfESIiwCM9/1H67LsSnd7EI=
 github.com/go-simd/base64 v0.0.0-20260806072918-de4c3405addc h1:Obf/Uye4NRmoqgo4Iz4GPOT8xGakGR+sAXF1PZ1QOOE=
 github.com/go-simd/base64 v0.0.0-20260806072918-de4c3405addc/go.mod h1:JNDIFvYDNtSrY/ZjKA8M/O2ggXtAYuxQzsxQ51TvjE0=
+github.com/go-simd/base64 v0.0.0-20260830212547-2fee128e345a h1:wMhy2Tf8691MgS4tRmIxPlX3x42OdE3F6VnzXbFqS04=
+github.com/go-simd/base64 v0.0.0-20260830212547-2fee128e345a/go.mod h1:P2YPxBiS0h0R01P7Cqrhj4cZHKiacpO3Z2qLE3RflOQ=
 github.com/go-simd/hex v0.0.0-20260627054622-d04d429c6aea h1:qVh9jV1QriPPfKtAb8au5pmVxKDk5Vl4nQUi/issQM0=
 github.com/go-simd/hex v0.0.0-20260627054622-d04d429c6aea/go.mod h1:q2/BdGuWJ9RahGzN+s+KtyacBAZFX15Nq0IikPFwKw0=
 github.com/go-simd/hex v0.0.0-20260806072922-d990a927bb97 h1:0VAW42EezUIvwMUOBbl5UgOwqh82+He5MkTVOdpjFYM=
