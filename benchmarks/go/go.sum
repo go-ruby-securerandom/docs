@@ -14,6 +14,8 @@ github.com/go-ruby-securerandom/securerandom v0.0.0-20260901145235-a424beb616c0 
 github.com/go-ruby-securerandom/securerandom v0.0.0-20260901145235-a424beb616c0/go.mod h1:vrWvaTCpbDF3OgjEtK7qVVyaHHRjQdXw0yjxKJ2CC7s=
 github.com/go-ruby-securerandom/securerandom v0.0.0-20260903192731-c7acee63c7de h1:icpN2hdR52pwYnK5h+s5b680GzPU4ZsuSiIAhQmsodw=
 github.com/go-ruby-securerandom/securerandom v0.0.0-20260903192731-c7acee63c7de/go.mod h1:Y20p+sN+s0vhNFMMMI07QMIHdcXrn/oFDIY6fZMUlHA=
+github.com/go-ruby-securerandom/securerandom v0.0.0-20260905061628-034ffbd65cbb h1:Tos99vsfzRLoOazJ9DgjH7bqp1fDvJ4AxxVaZCADYWI=
+github.com/go-ruby-securerandom/securerandom v0.0.0-20260905061628-034ffbd65cbb/go.mod h1:yW5SeOVboTtQaI9Qe/cbPjn4LBVccwhIGsXwCHQznHg=
 github.com/go-simd/base64 v0.0.0-20260627054622-4058a7093f4c h1:iA1vHw+pR44TUtDlviXz3P8pAExO1nSm39PMZ7MsuYU=
 github.com/go-simd/base64 v0.0.0-20260627054622-4058a7093f4c/go.mod h1:/nL/YHcchLkENbcFEEqAcfESIiwCM9/1H67LsSnd7EI=
 github.com/go-simd/base64 v0.0.0-20260806072918-de4c3405addc h1:Obf/Uye4NRmoqgo4Iz4GPOT8xGakGR+sAXF1PZ1QOOE=
@@ -28,6 +30,8 @@ github.com/go-simd/hex v0.0.0-20260806072922-d990a927bb97 h1:0VAW42EezUIvwMUOBbl
 github.com/go-simd/hex v0.0.0-20260806072922-d990a927bb97/go.mod h1:3p3dIgLYVg4CoY/q7EfnbX8QpTn0t8z/Z+WNsjLs+AM=
 github.com/go-simd/hex v0.0.0-20260830125320-01720f8331b2 h1:nx2Xp2qi3vYRn5Yu/xmBIzDhsmEqkKJ/fszFmehTElg=
 github.com/go-simd/hex v0.0.0-20260830125320-01720f8331b2/go.mod h1:ZwRN06+N0wTIjn+mxT2NF/CbzTMAlfH/c0CKG8q5cwU=
+github.com/go-simd/hex v0.0.0-20260903220024-a8d22a843218 h1:TymapuhKzqUf8LNtsv8L4PJY/gz5bAaEbD2cpot1vFI=
+github.com/go-simd/hex v0.0.0-20260903220024-a8d22a843218/go.mod h1:ZwRN06+N0wTIjn+mxT2NF/CbzTMAlfH/c0CKG8q5cwU=
 github.com/tmthrgd/go-hex v0.0.0-20190904060850-447a3041c3bc h1:9lRDQMhESg+zvGYmW5DyG0UqvY96Bu5QYsTLvCHdrgo=
 github.com/tmthrgd/go-hex v0.0.0-20190904060850-447a3041c3bc/go.mod h1:bciPuU6GHm1iF1pBvUfxfsH0Wmnc2VbpgvbI9ZWuIRs=
 golang.org/x/sys v0.28.0 h1:Fksou7UEQUWlKvIdsqzJmUmCX3cZuD2+P3XyyzwMhlA=
