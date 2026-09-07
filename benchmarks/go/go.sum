@@ -16,6 +16,8 @@ github.com/go-ruby-securerandom/securerandom v0.0.0-20260903192731-c7acee63c7de 
 github.com/go-ruby-securerandom/securerandom v0.0.0-20260903192731-c7acee63c7de/go.mod h1:Y20p+sN+s0vhNFMMMI07QMIHdcXrn/oFDIY6fZMUlHA=
 github.com/go-ruby-securerandom/securerandom v0.0.0-20260905061628-034ffbd65cbb h1:Tos99vsfzRLoOazJ9DgjH7bqp1fDvJ4AxxVaZCADYWI=
 github.com/go-ruby-securerandom/securerandom v0.0.0-20260905061628-034ffbd65cbb/go.mod h1:yW5SeOVboTtQaI9Qe/cbPjn4LBVccwhIGsXwCHQznHg=
+github.com/go-ruby-securerandom/securerandom v0.0.0-20260906100411-d9d2a8ce7995 h1:NGhL04T7ZEXwpRxdOf8NYVESXSH9opjG31cFZgw71tE=
+github.com/go-ruby-securerandom/securerandom v0.0.0-20260906100411-d9d2a8ce7995/go.mod h1:AXmjWZDPb7iCmnVXsR16rEQdV2H6B46s8GewxL6HYCc=
 github.com/go-simd/base64 v0.0.0-20260627054622-4058a7093f4c h1:iA1vHw+pR44TUtDlviXz3P8pAExO1nSm39PMZ7MsuYU=
 github.com/go-simd/base64 v0.0.0-20260627054622-4058a7093f4c/go.mod h1:/nL/YHcchLkENbcFEEqAcfESIiwCM9/1H67LsSnd7EI=
 github.com/go-simd/base64 v0.0.0-20260806072918-de4c3405addc h1:Obf/Uye4NRmoqgo4Iz4GPOT8xGakGR+sAXF1PZ1QOOE=
@@ -24,6 +26,8 @@ github.com/go-simd/base64 v0.0.0-20260830212547-2fee128e345a h1:wMhy2Tf8691MgS4t
 github.com/go-simd/base64 v0.0.0-20260830212547-2fee128e345a/go.mod h1:P2YPxBiS0h0R01P7Cqrhj4cZHKiacpO3Z2qLE3RflOQ=
 github.com/go-simd/base64 v0.0.0-20260901145456-eb8404bccc8f h1:sfv1tO3vPwaD0uTTJcGWgwDYLKmcILOyL8fziNUKHY4=
 github.com/go-simd/base64 v0.0.0-20260901145456-eb8404bccc8f/go.mod h1:P2YPxBiS0h0R01P7Cqrhj4cZHKiacpO3Z2qLE3RflOQ=
+github.com/go-simd/base64 v0.0.0-20260903220000-c04f5883bb18 h1:qRxVDQapJmkrxakah1XqYxnYc8nhbTUhb0R7ZF+ZkiU=
+github.com/go-simd/base64 v0.0.0-20260903220000-c04f5883bb18/go.mod h1:P2YPxBiS0h0R01P7Cqrhj4cZHKiacpO3Z2qLE3RflOQ=
 github.com/go-simd/hex v0.0.0-20260627054622-d04d429c6aea h1:qVh9jV1QriPPfKtAb8au5pmVxKDk5Vl4nQUi/issQM0=
 github.com/go-simd/hex v0.0.0-20260627054622-d04d429c6aea/go.mod h1:q2/BdGuWJ9RahGzN+s+KtyacBAZFX15Nq0IikPFwKw0=
 github.com/go-simd/hex v0.0.0-20260806072922-d990a927bb97 h1:0VAW42EezUIvwMUOBbl5UgOwqh82+He5MkTVOdpjFYM=
