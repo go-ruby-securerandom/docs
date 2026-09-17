@@ -2,7 +2,7 @@ module bench
 
 go 1.26.4
 
-require github.com/go-ruby-securerandom/securerandom v0.0.0-20260906100411-d9d2a8ce7995
+require github.com/go-ruby-securerandom/securerandom v0.0.0-20260916102518-8f55919c115b
 
 require (
 	github.com/go-simd/base64 v0.0.0-20260903220000-c04f5883bb18 // indirect
